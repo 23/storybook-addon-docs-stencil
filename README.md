@@ -6,13 +6,14 @@ Converts stencil.js doc json derived from stencils output target
 
 With this addon activated
 - Storybook will render basic controls for properties [Controls](https://storybook.js.org/docs/react/essentials/controls).
+- Storybook will auto generate actions for component Events.
 - Storybook will auto generate documentation for Props, Events, Methods, Slots, Shadow Parts and Custom Properties.
 - Storybook doc page will contain stencils component documentation (readme.md or inline)   
 
 ## Installation
 
 ```
-npm i -D @pxtrn/storybook-addon-docs-stencil
+npm i -D @tutamkhamon/storybook-addon-docs-stencil
 ```
 
 ## Usage
@@ -42,7 +43,7 @@ export const config: Config = {
 module.exports = {
   addons: [
     '@storybook/addon-essentials',
-    '@pxtrn/storybook-addon-docs-stencil'
+    '@tutamkhamon/storybook-addon-docs-stencil'
   ]
 }
 ```

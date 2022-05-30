@@ -1,5 +1,5 @@
 {
-  "name": "@pxtrn/storybook-addon-docs-stencil",
+  "name": "@tutamkhamon/storybook-addon-docs-stencil",
   "version": "6.4.1",
   "description": "Converts stencil.js JsonDoc to storybook ArgTypes",
   "main": "dist/index.js",
@@ -23,9 +23,11 @@
   "license": "MIT",
   "dependencies": {
     "@storybook/api": "^6.4.9",
-    "@storybook/client-logger": "^6.4.9"
+    "@storybook/client-logger": "^6.4.9",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "eslint": "^8.5.0",

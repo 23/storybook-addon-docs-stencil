@@ -120,3 +120,7 @@ export interface StencilJsonDocsPart {
   name: string;
   docs: string;
 }
+
+export interface ExtractArgTypesOptions {
+  dashCase: boolean;
+}

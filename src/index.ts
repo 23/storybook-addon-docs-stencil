@@ -1,5 +1,6 @@
 import { ArgTypes } from '@storybook/api';
 import { logger } from '@storybook/client-logger';
+import { camelCase, kebabCase } from 'lodash';
 
 import {
   ExtractArgTypesOptions,
@@ -93,7 +94,8 @@ const mapPropsData = (data: StencilJsonDocsProp[], options: ExtractArgTypesOptio
     data &&
     data.reduce((acc, item) => {
       const { control, options } = mapPropTypeToControl(item);
-      const key = dashCase === true ? (item.attr || item.name) : item.name;
+      let key = (item.attr || item.name);
+      key = dashCase === true ? kebabCase(key) : camelCase(key)
 
       acc[key] = {
         name: item.attr || item.name,
@@ -114,12 +116,16 @@ const mapPropsData = (data: StencilJsonDocsProp[], options: ExtractArgTypesOptio
   );
 }
 
-const mapEventsData = (data: StencilJsonDocsEvent[]): ArgTypes => {
+const mapEventsData = (data: StencilJsonDocsEvent[], options: ExtractArgTypesOptions): ArgTypes => {
+  const { dashCase } = options;
   return (
     data &&
     data.reduce((acc, item) => {
-      acc[`event-${item.event}`] = {
+      let key = `event-${item.event}`;
+      key = dashCase === true ? kebabCase(key) : camelCase(key)
+      acc[key] = {
         name: item.event,
+        action: item.event,
         description: item.docs,
         type: { name: 'void' },
         control: null,
@@ -133,11 +139,15 @@ const mapEventsData = (data: StencilJsonDocsEvent[]): ArgTypes => {
   );
 }
 
-const mapMethodsData = (data: StencilJsonDocsMethod[]): ArgTypes => {
+const mapMethodsData = (data: StencilJsonDocsMethod[], options: ExtractArgTypesOptions): ArgTypes => {
+  const { dashCase } = options;
+
   return (
     data &&
     data.reduce((acc, item) => {
-      acc[`method-${item.name}`] = {
+      let key = `method-${item.name}`;
+      key = dashCase === true ? kebabCase(key) : camelCase(key)
+      acc[key] = {
         name: item.name,
         description: item.docs,
         type: { name: 'void' },
@@ -152,12 +162,42 @@ const mapMethodsData = (data: StencilJsonDocsMethod[]): ArgTypes => {
   );
 }
 
-const mapGenericData = <T extends {name: string, docs: string}>(data: T[], category: string): ArgTypes => {
+const mapSlotsData = (data: StencilJsonDocsSlot[], options: ExtractArgTypesOptions): ArgTypes => {
+  const { dashCase } = options;
+
+  return (
+    data &&
+    data.reduce((acc, item) => {
+      const name = item.name || '_default'
+      let key = `slot-${name}`;
+      key = dashCase === true ? kebabCase(key) : camelCase(key)
+      const type = { name: 'void' };
+      acc[key] = {
+        name: item.name,
+        required: false,
+        description: item.docs,
+        control: null,
+        type,
+        table: {
+          category: 'slots',
+          type,
+        },
+      };
+      return acc;
+    }, {} as ArgTypes)
+  );
+}
+
+const mapGenericData = <T extends {name: string, docs: string}>(data: T[], category: string, options: ExtractArgTypesOptions): ArgTypes => {
+  const { dashCase } = options;
+
   return (
     data &&
     data.reduce((acc, item) => {
       const type = { name: 'void' };
-      acc[`${category.replace(/\s/g, '-').toLowerCase()}-${item.name}`] = {
+      let key = `${category}-${item.name}`;
+      key = dashCase === true ? kebabCase(key) : camelCase(key)
+      acc[key] = {
         name: item.name,
         required: false,
         description: item.docs,
@@ -199,11 +239,11 @@ export const extractArgTypesFromElements = (
   return (
     metaData && {
       ...mapPropsData(metaData.props, options),
-      ...mapEventsData(metaData.events),
-      ...mapMethodsData(metaData.methods),
-      ...mapGenericData<StencilJsonDocsSlot>(metaData.slots, 'slots'),
-      ...mapGenericData<StencilJsonDocsStyle>(metaData.styles, 'css custom properties'),
-      ...mapGenericData<StencilJsonDocsPart>(metaData.parts, 'css shadow parts'),
+      ...mapEventsData(metaData.events, options),
+      ...mapMethodsData(metaData.methods, options),
+      ...mapSlotsData(metaData.slots, options),
+      ...mapGenericData<StencilJsonDocsStyle>(metaData.styles, 'css custom properties', options),
+      ...mapGenericData<StencilJsonDocsPart>(metaData.parts, 'css shadow parts', options),
     }
   );
 };
