@@ -1,5 +1,5 @@
 {
-  "name": "@tutamkhamon/storybook-addon-docs-stencil",
+  "name": "@23/storybook-addon-docs-stencil",
   "version": "6.4.1",
   "description": "Converts stencil.js JsonDoc to storybook ArgTypes",
   "main": "dist/index.js",

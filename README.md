@@ -13,7 +13,7 @@ With this addon activated
 ## Installation
 
 ```
-npm i -D @tutamkhamon/storybook-addon-docs-stencil
+npm i -D @23/storybook-addon-docs-stencil
 ```
 
 ## Usage
@@ -43,7 +43,7 @@ export const config: Config = {
 module.exports = {
   addons: [
     '@storybook/addon-essentials',
-    '@tutamkhamon/storybook-addon-docs-stencil'
+    '@23/storybook-addon-docs-stencil'
   ]
 }
 ```
