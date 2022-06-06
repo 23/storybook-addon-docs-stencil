@@ -51,7 +51,7 @@ module.exports = {
 ```
 //.storybook/preview.js
 
-import { setStencilDocJson } from '@pxtrn/storybook-addon-docs-stencil';
+import { setStencilDocJson } from '@23/storybook-addon-docs-stencil';
 import docJson from 'path/to/docs.json';
 if(docJson) setStencilDocJson(docJson);
 
@@ -65,7 +65,7 @@ export const parameters = {
 ```
 //.storybook/preview.js
 
-import { extractArgTypesFactory } from '@pxtrn/storybook-addon-docs-stencil';
+import { extractArgTypesFactory } from '@23/storybook-addon-docs-stencil';
 
 export const parameters = {
   docs: {
@@ -112,7 +112,7 @@ You can fix this with this preview config.
 ```
 //.storybook/preview.js
 
-import { extractArgTypes, extractComponentDescription, setStencilDocJson } from '@pxtrn/storybook-addon-docs-stencil';
+import { extractArgTypes, extractComponentDescription, setStencilDocJson } from '@23/storybook-addon-docs-stencil';
 
 export const parameters = {
   ...

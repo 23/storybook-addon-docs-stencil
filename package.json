@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pixtron/storybook-addon-docs-stencil.git"
+    "url": "git+https://github.com/23/storybook-addon-docs-stencil.git"
   },
   "bugs": {
-    "url": "https://github.com/pixtron/storybook-addon-docs-stencil/issues"
+    "url": "https://github.com/23/storybook-addon-docs-stencil/issues"
   },
-  "homepage": "https://github.com/pixtron/storybook-addon-docs-stencil#readme",
+  "homepage": "https://github.com/23/storybook-addon-docs-stencil#readme",
   "author": "Stefan Aebischer <os@pixtron.ch>",
   "license": "MIT",
   "dependencies": {
